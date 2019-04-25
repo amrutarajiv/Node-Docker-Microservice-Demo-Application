@@ -20,8 +20,6 @@ node {
     }
     
     stage('Run the containers'){
-        bat 'docker pull amrutarajiv/test_database'
-        bat 'docker pull amrutarajiv/users_service'
         bat "docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service"
     }
 }
