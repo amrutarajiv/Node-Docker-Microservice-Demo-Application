@@ -1,7 +1,7 @@
 node {
     
     stage('SCM Checkout') {
-        git credentialsId: 'github', url: 'https://github.com/amrutarajiv/Node-Docker-Microservice-Demo-Application/tree/master/users-service'
+        git credentialsId: 'github', url: 'https://github.com/amrutarajiv/Node-Docker-Microservice-Demo-Application'
     }
     
     stage('Build and Test'){
@@ -12,7 +12,8 @@ node {
     }
     
     stage('Build Docker image'){
-        bat "docker build -t amrutarajiv/users_service:${env.BUILD_ID} ."
+        bat "docker build -t amrutarajiv/test_database ./users-service"
+        bat "docker build -t amrutarajiv/users_service ./test-database"
     }
     
     stage('Push Docker image'){
@@ -20,7 +21,8 @@ node {
             bat "docker login -u amrutarajiv -p ${dockerHubPwd}"
         }        
         
-        bat "docker push amrutarajiv/users_service:${env.BUILD_ID}"
+        bat "docker push amrutarajiv/test_database"
+        bat "docker push amrutarajiv/users_service"
         
     }
 }
