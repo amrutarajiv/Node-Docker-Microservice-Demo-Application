@@ -18,4 +18,8 @@ node {
         bat "docker push amrutarajiv/users_service"
         
     }
+    
+    stage('Run the containers'){
+        bat 'docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB users-service'
+    }
 }
