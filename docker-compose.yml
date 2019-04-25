@@ -1,7 +1,7 @@
 version: '2'
 services:
   users-service:
-    build: ./users-service
+    image: amrutarajiv/users_service
     container_name: users_service
     ports:
      - "8123:8123"
@@ -12,4 +12,4 @@ services:
     environment:
      - DATABASE_HOST=db
   db:
-    build: ./test-database
+    image: amrutarajiv/test_database
