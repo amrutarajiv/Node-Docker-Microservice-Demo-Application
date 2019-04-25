@@ -20,6 +20,6 @@ node {
     }
     
     stage('Run the containers'){
-        bat 'docker-compose up -d'
+        bat "docker-compose up -d"
     }
 }
