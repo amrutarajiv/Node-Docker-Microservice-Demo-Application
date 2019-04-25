@@ -8,6 +8,6 @@ module.exports = {
     database: 'users',
     user: 'users_service',
     password: '123',
-    port: 3307
+    port: 3306
   }
 };
