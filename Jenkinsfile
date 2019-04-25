@@ -20,6 +20,17 @@ node {
     }
     
     stage('Run the containers'){
-        bat "docker-compose up -d"
+        docker.image('amrutarajiv/test_database').withRun('-e "MYSQL_ROOT_PASSWORD=123"') { c ->
+        docker.image('amrutarajiv/test_database').inside("--link ${c.id}:db") {
+            /* Wait until mysql service is up */
+            bat 'while ! mysqladmin ping -hdb --silent; do sleep 1; done'
+        }
+        docker.image('amrutarajiv/users_service').inside("--link ${c.id}:db") {
+            /*
+             * Run some tests which require MySQL, and assume that it is
+             * available on the host name `db`
+             */
+            bat 'make check'
+        }
     }
 }
