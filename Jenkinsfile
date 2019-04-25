@@ -5,8 +5,8 @@ node {
     }
         
     stage('Build Docker image'){
-        bat "docker build -t amrutarajiv/test_database ./users-service"
-        bat "docker build -t amrutarajiv/users_service ./test-database"
+        bat "docker build -t amrutarajiv/test_database ./test-database"
+        bat "docker build -t amrutarajiv/users_service ./users-service"
     }
     
     stage('Push Docker image'){
