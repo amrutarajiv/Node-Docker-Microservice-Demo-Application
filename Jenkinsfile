@@ -3,15 +3,7 @@ node {
     stage('SCM Checkout') {
         git credentialsId: 'github', url: 'https://github.com/amrutarajiv/Node-Docker-Microservice-Demo-Application'
     }
-    
-    stage('Build and Test'){
-        nodejs('node') {
-            bat 'cd ./users-service'
-            bat 'npm install'
-            bat 'npm test'
-        }
-    }
-    
+        
     stage('Build Docker image'){
         bat "docker build -t amrutarajiv/test_database ./users-service"
         bat "docker build -t amrutarajiv/users_service ./test-database"
