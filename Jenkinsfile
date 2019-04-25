@@ -6,6 +6,7 @@ node {
     
     stage('Build and Test'){
         nodejs('node') {
+            bat 'cd ./users-service'
             bat 'npm install'
             bat 'npm test'
         }
