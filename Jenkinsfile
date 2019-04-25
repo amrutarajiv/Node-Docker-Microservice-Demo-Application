@@ -31,6 +31,7 @@ node {
              * available on the host name `db`
              */
             bat 'make check'
+            }
         }
     }
 }
