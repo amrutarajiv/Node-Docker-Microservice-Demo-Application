@@ -26,7 +26,7 @@ node {
     }
 
     stage('Run the app'){
-        docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service
+        bat 'docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service'
     }
 
 }
