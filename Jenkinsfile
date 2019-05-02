@@ -19,19 +19,14 @@ node {
         
     }
     
-    stage('Run the containers'){
-        docker.image('amrutarajiv/test_database').withRun('-e "MYSQL_ROOT_PASSWORD=123"') { c ->
-        docker.image('amrutarajiv/test_database').inside("--link ${c.id}:db") {
-            /* Wait until mysql service is up */
-            bat 'while ! mysqladmin ping -hdb --silent; do sleep 1; done'
-        }
-        docker.image('amrutarajiv/users_service').inside("--link ${c.id}:db") {
-            /*
-             * Run some tests which require MySQL, and assume that it is
-             * available on the host name `db`
-             */
-            bat 'make check'
-            }
+    stage('Run the db container'){
+        timeout(time: 10, unit: 'MINUTES') {
+        bat 'docker run --name db -d -e MYSQL_ROOT_PASSWORD=123 -p 3307:3306 amrutarajiv/test_database'
         }
     }
+
+    stage('Run the app'){
+        docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service
+    }
+
 }
