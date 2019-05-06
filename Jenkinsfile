@@ -20,13 +20,7 @@ node {
     }
     
     stage('Run the db container'){
-        timeout(time: 10, unit: 'MINUTES') {
-        bat 'docker run --name db -d -e MYSQL_ROOT_PASSWORD=123 -p 3307:3306 amrutarajiv/test_database'
-        }
-    }
-
-    stage('Run the app'){
-        bat 'docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service'
+     bat 'docker-compose -f docker-compose.yml up -d'
     }
 
 }
