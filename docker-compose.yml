@@ -2,7 +2,6 @@ version: '3'
 services:
   users-service:
     build: users-service
-    command: npm start
     environment:
      - DATABASE_HOST=db
     depends_on:
