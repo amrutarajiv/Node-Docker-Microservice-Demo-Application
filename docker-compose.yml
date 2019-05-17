@@ -3,7 +3,6 @@ services:
   users-service:
     build: users-service
     command: npm start
-    entrypoint: ./test-database
     environment:
      - DATABASE_HOST=db
     depends_on:
