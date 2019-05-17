@@ -28,7 +28,7 @@ node {
     }
     
      stage('Run containers'){
-	bat "${compose} up -d"
+	bat "${compose} run test"
 	}
 
 }
