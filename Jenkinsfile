@@ -28,7 +28,9 @@ node {
     }
     
      stage('Run containers'){
-	bat "${compose} run test"
+         timeout(time: 20, unit: 'MINUTES'){
+	        bat "${compose} up -d"
+         }
 	}
 
 }
