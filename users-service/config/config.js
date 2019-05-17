@@ -8,6 +8,9 @@ module.exports = {
     database: 'users_db',
     user: 'users_service',
     password: '123',
-    port: 3307
+    port: 3307,
+    connectionLimit: 50,
+    queueLimit: 0,
+    waitForConnection: true
   }
 };
