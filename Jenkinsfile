@@ -1,11 +1,7 @@
 node {
     
     def compose = "docker-compose -f docker-compose.yml -p nodeapp"
-	
-	stage('Timeout'){
-		timeout(time: 20, unit: 'MINUTES')
-	}
-	
+		
 	stage('SCM Checkout') {
         git credentialsId: 'github', url: 'https://github.com/amrutarajiv/Node-Docker-Microservice-Demo-Application'
     }
