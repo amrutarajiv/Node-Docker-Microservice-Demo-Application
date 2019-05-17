@@ -26,7 +26,9 @@ node {
     } */
     
     stage('Build containers'){
+	    timeout(time: 20, unit: 'MINUTES'){
 	bat "${compose} build --pull"
+	    }
     }
     
      stage('Run containers'){
