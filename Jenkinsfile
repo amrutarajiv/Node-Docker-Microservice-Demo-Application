@@ -31,4 +31,6 @@ node {
     
      stage('Run containers'){
 	bat "${compose} up -d"
+	}
+
 }
