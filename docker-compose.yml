@@ -3,7 +3,7 @@ services:
   users-service:
     build: users-service
     command: npm start
-    entrypoint: ./test-database/docker-entrypoint-initdb.d
+    entrypoint: ./test-database
     environment:
      - DATABASE_HOST=db
     depends_on:
