@@ -5,8 +5,8 @@ node {
     }
         
     stage('Build Docker image'){
-        bat "docker build -t amrutarajiv/test_database ./users-service"
-        bat "docker build -t amrutarajiv/users_service ./test-database"
+        bat "docker build -t amrutarajiv/test_database ./test-database"
+        bat "docker build -t amrutarajiv/users_service ./users-service"
     }
     
     stage('Push Docker image'){
@@ -19,7 +19,14 @@ node {
         
     }
     
-    stage('Run the containers'){
-        bat 'docker-compose up -d'
+    stage('Run the db container'){
+        timeout(time: 10, unit: 'MINUTES') {
+        bat 'docker run --name db -d -e MYSQL_ROOT_PASSWORD=123 -p 3307:3306 amrutarajiv/test_database'
+        }
     }
+
+    stage('Run the app'){
+        docker run -d -p 8123:8123 --link db:db -e DATABASE_HOST=DB amrutarajiv/users-service
+    }
+
 }
